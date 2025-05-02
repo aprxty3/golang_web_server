@@ -33,5 +33,88 @@
     }
   ],
   "paths": {
+    "/todolist": {
+      "get": {
+        "summary": "Get All Todo List",
+        "description": "Get All Todo List from Database",
+        "parameters": [
+          {
+            "name": "include_done",
+            "in": "query",
+            "required": false,
+            "description": "Is Include Done",
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": false
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "description": "Filter todolist by name",
+            "schema": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1,
+              "maxLength": 100
+            }
+          }
+        ],
+        "responses": {
+        }
+      },
+      "post": {
+        "summary": "Create New Todo List",
+        "description": "Create New Todo List to Database",
+        "responses": {
+        }
+      }
+    },
+    "/todolist/{todolistId}": {
+      "delete": {
+        "summary": "Delete Spesific Todo List",
+        "description": "Delete Spesific Todo List from Database",
+        "parameters": [
+          {
+            "name": "todolistId",
+            "in": "path",
+            "required": true,
+            "description": "ToDo List ID",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            }
+          }
+        ],
+        "responses": {
+        }
+      },
+      "put": {
+        "summary": "Change Spesific Todo List",
+        "description": "Change Spesific Todo List from Database",
+        "parameters": [
+          {
+            "name": "todolistId",
+            "in": "path",
+            "required": true,
+            "description": "ToDo List ID",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            }
+          }
+        ],
+        "responses": {
+        }
+      }
+    }
   }
 }
