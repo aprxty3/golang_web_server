@@ -1,8 +1,8 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Learn OpenAPI",
-    "description": "Learn OpenAPI",
+    "title": "ToDo List RESTful API",
+    "description": "ToDo List RESTful API",
     "version": "1.0.0",
     "termsOfService": "www.aji.com",
     "contact": {
@@ -15,7 +15,23 @@
       "url": "https://www.apache.org/licenses/LICENSE-2.0"
     }
   },
-  "servers": [],
+  "servers": [
+    {
+      "description": "ToDo List RESTful API",
+      "url": "www.{environment}.aji.com/api/v1",
+      "variables": {
+        "environment": {
+          "description": "Server Environment",
+          "default": "dev",
+          "enum": [
+            "dev",
+            "qa",
+            "prod"
+          ]
+        }
+      }
+    }
+  ],
   "paths": {
   }
 }
