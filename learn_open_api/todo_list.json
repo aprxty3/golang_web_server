@@ -1,6 +1,20 @@
 {
   "openapi": "3.1.0",
-  "info": {},
+  "info": {
+    "title": "Learn OpenAPI",
+    "description": "Learn OpenAPI",
+    "version": "1.0.0",
+    "termsOfService": "www.aji.com",
+    "contact": {
+      "name": "Aji",
+      "email": "aji@gmail.com",
+      "url": "www.aji.com"
+    },
+    "license": {
+      "name": "APACHE 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
   "servers": [],
   "paths": {
   }
