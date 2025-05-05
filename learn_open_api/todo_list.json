@@ -72,6 +72,14 @@
       "post": {
         "summary": "Create New Todo List",
         "description": "Create New Todo List to Database",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {}
+            }
+          }
+        },
         "responses": {
         }
       }
@@ -112,6 +120,14 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {}
+            }
+          }
+        },
         "responses": {
         }
       }
