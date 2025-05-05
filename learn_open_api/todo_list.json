@@ -35,7 +35,14 @@
   "paths": {
     "/todolist": {
       "get": {
-        "tags": ["Todolist"],
+        "security": [
+          {
+            "todolistAuth": []
+          }
+        ],
+        "tags": [
+          "Todolist"
+        ],
         "summary": "Get All Todo List",
         "description": "Get All Todo List from Database",
         "parameters": [
@@ -69,64 +76,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Success get all data",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "priority": {
-                        "type": "string"
-                      },
-                      "tags": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "success": {
-                    "description": "Success get all data",
-                    "value": [
-                      {
-                        "id": 1,
-                        "name": "Java",
-                        "priority": 3,
-                        "tags": [
-                          "Java",
-                          "Programming"
-                        ]
-                      },
-                      {
-                        "id": 2,
-                        "name": "PHP",
-                        "priority": 5,
-                        "tags": [
-                          "PHP",
-                          "Programming"
-                        ]
-                      }
-                    ]
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SuccessGetAllTodoList"
           }
         }
       },
       "post": {
-        "tags": ["Todolist"],
+        "security": [
+          {
+            "todolistAuth": []
+          }
+        ],
+        "tags": [
+          "Todolist"
+        ],
         "summary": "Create New Todo List",
         "description": "Create New Todo List to Database",
         "requestBody": {
@@ -134,42 +96,30 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "minLength": 1,
-                    "required": true
-                  },
-                  "priority": {
-                    "type": "integer",
-                    "format": "int32",
-                    "default": 1,
-                    "required": true
-                  },
-                  "tags": {
-                    "type": "array",
-                    "required": true,
-                    "minItems": 1,
-                    "items": {
-                      "type": "string",
-                      "minLength": 1
-                    }
-                  }
-                }
+                "$ref": "#/components/schemas/TodoListRequest"
               }
             }
           }
         },
         "responses": {
+          "201": {
+            "description": "Todo List created successfully"
+          }
         }
       }
     },
     "/todolist/{todolistId}": {
       "delete": {
-        "tags": ["Todolist"],
-        "summary": "Delete Spesific Todo List",
-        "description": "Delete Spesific Todo List from Database",
+        "security": [
+          {
+            "todolistAuth": []
+          }
+        ],
+        "tags": [
+          "Todolist"
+        ],
+        "summary": "Delete Specific Todo List",
+        "description": "Delete Specific Todo List from Database",
         "parameters": [
           {
             "name": "todolistId",
@@ -184,12 +134,22 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Todo List deleted successfully"
+          }
         }
       },
       "put": {
-        "tags": ["Todolist"],
-        "summary": "Change Spesific Todo List",
-        "description": "Change Spesific Todo List from Database",
+        "security": [
+          {
+            "todolistAuth": []
+          }
+        ],
+        "tags": [
+          "Todolist"
+        ],
+        "summary": "Change Specific Todo List",
+        "description": "Change Specific Todo List from Database",
         "parameters": [
           {
             "name": "todolistId",
@@ -208,34 +168,111 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "minLength": 1,
-                    "required": true
-                  },
-                  "priority": {
-                    "type": "integer",
-                    "format": "int32",
-                    "default": 1,
-                    "required": true
-                  },
-                  "tags": {
-                    "type": "array",
-                    "required": true,
-                    "minItems": 1,
-                    "items": {
-                      "type": "string",
-                      "minLength": 1
-                    }
-                  }
-                }
+                "$ref": "#/components/schemas/TodoListRequest"
               }
             }
           }
         },
         "responses": {
+          "200": {
+            "description": "Todo List updated successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "todolistAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    },
+    "schemas": {
+      "TodoListItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TodoListRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "required": true
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32",
+            "default": 1,
+            "required": true
+          },
+          "tags": {
+            "type": "array",
+            "required": true,
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "SuccessGetAllTodoList": {
+        "description": "Success get all data",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/TodoListItem"
+              }
+            },
+            "examples": {
+              "success": {
+                "description": "Success get all data",
+                "value": [
+                  {
+                    "id": 1,
+                    "name": "Java",
+                    "priority": 3,
+                    "tags": [
+                      "Java",
+                      "Programming"
+                    ]
+                  },
+                  {
+                    "id": 2,
+                    "name": "PHP",
+                    "priority": 5,
+                    "tags": [
+                      "PHP",
+                      "Programming"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
         }
       }
     }
