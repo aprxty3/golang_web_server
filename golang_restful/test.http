@@ -8,21 +8,21 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "Kulkas"
+  "name": "AAAA"
 }
 
 ###GET by Id
-GET localhost:3000/api/categories/6
+GET localhost:3000/api/categories/100
 Accept: application/json
 Content-Type: application/json
 
 ###DELETE by Id
-DELETE localhost:3000/api/categories/5
+DELETE localhost:3000/api/categories/100
 Accept: application/json
 Content-Type: application/json
 
 ###PUT by Id
-PUT http://localhost:3000/api/categories/7
+PUT http://localhost:3000/api/categories/100
 Accept: application/json
 Content-Type: application/json
 
