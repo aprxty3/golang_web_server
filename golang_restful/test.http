@@ -1,28 +1,33 @@
 ###GET All Categories
 GET localhost:3000/api/categories
+X-API-Key: Rahasia
 Accept: application/json
 
 ###POST New Category
 POST http://localhost:3000/api/categories
+X-API-Key: Rahasia
 Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "AAAA"
+  "name": ""
 }
 
 ###GET by Id
 GET localhost:3000/api/categories/100
+X-API-Key: Rahasia
 Accept: application/json
 Content-Type: application/json
 
 ###DELETE by Id
 DELETE localhost:3000/api/categories/100
+X-API-Key: Rahasia
 Accept: application/json
 Content-Type: application/json
 
 ###PUT by Id
-PUT http://localhost:3000/api/categories/100
+PUT http://localhost:3000/api/categories/
+X-API-Key: Rahasia
 Accept: application/json
 Content-Type: application/json
 
