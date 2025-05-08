@@ -8,10 +8,9 @@ import (
 	"golang_restful/model/domain"
 )
 
-type CategoryRepositoryImpl struct {
-}
+type CategoryRepositoryImpl struct{}
 
-func (repository *CategoryRepositoryImpl) Save(ctx context.Context, tx *sqlx.Tx, category domain.Category) domain.Category {
+func (repository *CategoryRepositoryImpl) Create(ctx context.Context, tx *sqlx.Tx, category domain.Category) domain.Category {
 	SQL := "insert into customer(name) values (?)"
 	result, err := tx.ExecContext(ctx, SQL, category.Name)
 	helper.PanicIfError(err)
