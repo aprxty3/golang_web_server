@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"github.com/go-playground/validator/v10"
 	"github.com/jmoiron/sqlx"
 	"golang_restful/helper"
 	"golang_restful/model/domain"
@@ -12,9 +13,13 @@ import (
 type CategoryServiceImpl struct {
 	CategoryRepository repository.CategoryRepository
 	DB                 *sqlx.DB
+	Validate           *validator.Validate
 }
 
 func (service CategoryServiceImpl) Create(ctx context.Context, request web.CategoryCreateRequest) web.CategoryResponse {
+	errValidate := service.Validate.Struct(request)
+	helper.PanicIfError(errValidate)
+
 	tx, err := service.DB.Beginx()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
@@ -27,6 +32,9 @@ func (service CategoryServiceImpl) Create(ctx context.Context, request web.Categ
 }
 
 func (service CategoryServiceImpl) Update(ctx context.Context, request web.CategoryUpdateRequest) web.CategoryResponse {
+	errValidate := service.Validate.Struct(request)
+	helper.PanicIfError(errValidate)
+
 	tx, err := service.DB.Beginx()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
