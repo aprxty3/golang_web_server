@@ -3,10 +3,8 @@ package main
 import (
 	"github.com/go-playground/validator/v10"
 	_ "github.com/jackc/pgx/v5/stdlib"
-	"github.com/julienschmidt/httprouter"
 	"golang_restful/app"
 	"golang_restful/controller"
-	"golang_restful/exception"
 	"golang_restful/helper"
 	"golang_restful/middleware"
 	"golang_restful/repository"
@@ -22,15 +20,7 @@ func main() {
 	categoryService := service.NewCategoryService(categoryRepository, db, validate)
 	categoryController := controller.NewCategoryController(categoryService)
 
-	router := httprouter.New()
-
-	router.GET("/api/categories", categoryController.FindAll)
-	router.POST("/api/categories", categoryController.Create)
-	router.GET("/api/categories/:categoryId", categoryController.FindById)
-	router.PUT("/api/categories/:categoryId", categoryController.Update)
-	router.DELETE("/api/categories/:categoryId", categoryController.Delete)
-
-	router.PanicHandler = exception.ErrorHandler
+	router := app.NewRouter(categoryController)
 
 	serve := http.Server{
 		Addr:    "localhost:3000",
